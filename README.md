@@ -4,7 +4,6 @@ Software engineer specialising in **C++ and database systems**, with 3+
 years of professional experience.
 
 ![C++](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 ![GCC](https://img.shields.io/badge/GCC-A42E2B?style=flat-square&logo=gnu&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
@@ -15,7 +14,7 @@ years of professional experience.
 - 🎓 Completing a Master of Information Technology at the University of
   Waikato, New Zealand
 - 🧠 Interested in query engines, storage engines, and systems programming in C++
-- 📍 Based in the Waikato, New Zealand — open to software engineering roles, C++ or Python
+- 📍 Based in the Waikato, New Zealand — open to software engineering roles
 
 #### Impact, at a glance
 
@@ -79,5 +78,5 @@ PG14 discussion worried about measured at worst +12µs. Posted to
 
 ---
 
-💼 Looking for **software engineering roles** (better in C++ or Python backend) — in New Zealand or remote.
+💼 Looking for **software engineering roles** (most experience in C++) — in New Zealand or remote.
 📫 linden.lance.developer@gmail.com
