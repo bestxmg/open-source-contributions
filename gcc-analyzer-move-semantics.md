@@ -1,14 +1,11 @@
 # GCC: Reducing Needless Value Copies in the Analyzer and Middle-End
 
-**Status:** Posted to `gcc-patches@gcc.gnu.org`, 23 September 2026. Reviewed
-positively by GCC analyzer maintainer David Malcolm and GCC maintainer
-Martin Jambor — patches 1–3 approved as posted; the `text-art`/`canvas.cc`
-and `ipa-cp` patches revised (v2) on 26 September in direct response to
-their feedback. **The `ipa-cp` patch is merged** — Martin Jambor committed
-it as
-[`fe236f5bef7`](https://github.com/gcc-mirror/gcc/commit/fe236f5bef799694f693f4eb004634738cb1c059)
-on my behalf, since I don't have commit access. The rest of the series is
-still awaiting push.
+**Status:** Posted to `gcc-patches@gcc.gnu.org`, 23 September 2026.
+**Fully merged** into GCC trunk as of 6 October 2026 — all five patches
+plus the David Malcolm-suggested `array2::set` follow-up are committed,
+with authorship preserved throughout. I don't have commit access, so GCC
+analyzer maintainer David Malcolm and GCC maintainer Martin Jambor pushed
+the patches on my behalf.
 
 ## Motivation
 
@@ -79,5 +76,19 @@ overlap between the two sets across all 8 pairs.
   [`fe236f5bef7`](https://github.com/gcc-mirror/gcc/commit/fe236f5bef799694f693f4eb004634738cb1c059),
   authorship preserved (`Author: linden <bestxmg@gmail.com>`), 2 files
   changed (`gcc/ipa-cp.cc`, `gcc/ipa-cp.h`).
+- **Merged (6 Oct):** David Malcolm committed the rest of the series —
+  authorship preserved throughout:
+  - [`7532151`](https://github.com/gcc-mirror/gcc/commit/7532151) ---
+    `analyzer: avoid deep-copying program_state when creating an
+    exploded_node` --- the measured 6.06% `-fanalyzer` speedup patch.
+  - [`89cb8a7`](https://github.com/gcc-mirror/gcc/commit/89cb8a7) ---
+    `analyzer, diagnostics: add missing std::move for by-value sinks`
+  - [`b3b1b80`](https://github.com/gcc-mirror/gcc/commit/b3b1b80) ---
+    `diagnostics: take HTML tag names as const char * in source-printing`
+  - [`d5cdcaa`](https://github.com/gcc-mirror/gcc/commit/d5cdcaa) ---
+    `gcc, analyzer: drop std::move calls that have no effect`
+  - [`2633f49`](https://github.com/gcc-mirror/gcc/commit/2633f49) ---
+    `text-art: add array2::set overload taking an rvalue element` --- the
+    cleaner fix David suggested for patch 4's `canvas.cc` hunk.
 
 [Cover letter and full review thread →](<PENDING: public archive link, not yet indexed>)

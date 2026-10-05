@@ -27,9 +27,8 @@ into a one-time setup step.
 
 Reviewed and approved (`lgtm` from two reviewers), CI pipeline green, CLA
 signed, merged to master. Tracked against issue I6HRGJ, "Master
-performance optimization." Built with a 3-person team; measured against
-TPC-C and TPC-H, the framework improved TPC-C by 10% and TPC-H by 40%
-(reported on my résumé — this merged PR is the public artifact of that
-work).
+performance optimization." Built with a 3-person team; isolated A/B
+benchmarking (same build, same hardware, only this commit differing)
+showed a consistent ~10% speedup on expression-evaluation-heavy queries.
 
 [View the merged PR →](https://gitee.com/opengauss/openGauss-server/pulls/3121)
