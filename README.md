@@ -20,29 +20,12 @@ years of professional experience.
 
 | | |
 |---|---|
+| **6.06%** faster `-fanalyzer`, 5-patch series merged | GCC, reviewed by GCC's analyzer maintainer → [details](./gcc-analyzer-move-semantics.md) |
 | **Merged**, 118 files | openGauss kernel — public proof of the Expression Flattening project on my résumé → [details](./opengauss-expression-flattening.md) |
 | **156 → 0** warnings, **~2.7×** faster CI | mealie, 3 PRs merged → [details](./mealie-testing.md) |
-| **6.06%** faster `-fanalyzer`, 5-patch series merged | GCC, reviewed by GCC's analyzer maintainer → [details](./gcc-analyzer-move-semantics.md) |
 | **~49×** faster at N=1000 | PostgreSQL, parameterised `IN` / `= ANY` queries → [details](./postgresql-hashed-saop.md) |
 
 #### Selected Open Source Contributions
-
-**openGauss — [Flattening the expression evaluation framework](https://gitee.com/opengauss/openGauss-server/pulls/3121)** · *merged*
-
-The public counterpart to the Expression Flattening Computation Framework
-on my résumé from Huawei's GaussDB team. Flattens the expression tree once
-at init instead of re-walking it recursively on every evaluation. Merged
-to `openGauss/openGauss-server` master, March 2023, 118 files.
-
-→ [Full write-up](./opengauss-expression-flattening.md)
-
-**mealie — [Test suite reliability and speed](https://github.com/mealie-recipes/mealie)** · *3 PRs merged*
-
-Eliminated all 156 pytest warnings by root-causing each one (not
-suppressing them), locked that in by making warnings fail CI, then cut
-the test suite from ~4 min to ~1.5 min with isolated parallel workers.
-
-→ [Full write-up](./mealie-testing.md)
 
 **GCC — Reduce needless value copies in the analyzer and a few hot middle-end paths** · *merged*
 
@@ -63,6 +46,23 @@ maintainer **Martin Jambor**, who pushed the full series on my behalf
 [`2633f49`](https://github.com/gcc-mirror/gcc/commit/2633f49).
 
 → [Full write-up](./gcc-analyzer-move-semantics.md)
+
+**openGauss — [Flattening the expression evaluation framework](https://gitee.com/opengauss/openGauss-server/pulls/3121)** · *merged*
+
+The public counterpart to the Expression Flattening Computation Framework
+on my résumé from Huawei's GaussDB team. Flattens the expression tree once
+at init instead of re-walking it recursively on every evaluation. Merged
+to `openGauss/openGauss-server` master, March 2023, 118 files.
+
+→ [Full write-up](./opengauss-expression-flattening.md)
+
+**mealie — [Test suite reliability and speed](https://github.com/mealie-recipes/mealie)** · *3 PRs merged*
+
+Eliminated all 156 pytest warnings by root-causing each one (not
+suppressing them), locked that in by making warnings fail CI, then cut
+the test suite from ~4 min to ~1.5 min with isolated parallel workers.
+
+→ [Full write-up](./mealie-testing.md)
 
 **PostgreSQL — [Hashing a parameterised ScalarArrayOpExpr](https://www.mail-archive.com/pgsql-hackers@lists.postgresql.org/msg238384.html)** · *work in progress*
 
