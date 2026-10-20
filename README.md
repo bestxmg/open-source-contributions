@@ -20,30 +20,26 @@ years of professional experience.
 
 | | |
 |---|---|
-| **6.06%** faster `-fanalyzer`, 5-patch series merged | GCC, reviewed by GCC's analyzer maintainer → [details](./gcc-analyzer-move-semantics.md) |
+| **6.06%** faster `-fanalyzer`, 9 commits merged | GCC, reviewed and pushed by three GCC maintainers → [details](./gcc-analyzer-move-semantics.md) |
 | **Merged**, 118 files | openGauss kernel — public proof of the Expression Flattening project on my résumé → [details](./opengauss-expression-flattening.md) |
 | **156 → 0** warnings, **~2.7×** faster CI | mealie, 3 PRs merged → [details](./mealie-testing.md) |
-| **~49×** faster at N=1000 | PostgreSQL, parameterised `IN` / `= ANY` queries → [details](./postgresql-hashed-saop.md) |
+| **972 → 30 ms** on a prepared-statement join | PostgreSQL, long `IN` / `= ANY` lists under a generic plan · under review → [details](./postgresql-hashed-saop.md) |
 
 #### Selected Open Source Contributions
 
-**GCC — Reduce needless value copies in the analyzer and a few hot middle-end paths** · *merged*
+**GCC — Reduce needless value copies in the analyzer and a few hot middle-end paths** · *9 commits merged*
 
-5-patch series to `gcc-patches@gcc.gnu.org`, found by auditing the tree
-with clang-tidy's `performance-*` checks for missed moves and needless
-by-value parameters. Patch 1 gives `program_state` a move-assignment
-operator and threads the move through `point_and_state` and
-`exploded_node`, removing a deep copy of the whole region model on every
-exploded-graph node — a measured **6.06% speedup** on `-fanalyzer`
-(63.98s → 60.10s median, 8 interleaved runs, no overlap). Reviewed
-positively by GCC analyzer maintainer **David Malcolm** and GCC
-maintainer **Martin Jambor**, who pushed the full series on my behalf
-(no commit access) — [`fe236f5bef7`](https://github.com/gcc-mirror/gcc/commit/fe236f5bef799694f693f4eb004634738cb1c059),
-[`7532151`](https://github.com/gcc-mirror/gcc/commit/7532151),
-[`89cb8a7`](https://github.com/gcc-mirror/gcc/commit/89cb8a7),
-[`b3b1b80`](https://github.com/gcc-mirror/gcc/commit/b3b1b80),
-[`d5cdcaa`](https://github.com/gcc-mirror/gcc/commit/d5cdcaa),
-[`2633f49`](https://github.com/gcc-mirror/gcc/commit/2633f49).
+Started as a 5-patch series to `gcc-patches@gcc.gnu.org`, found by
+auditing the tree with clang-tidy's `performance-*` checks for missed
+moves and needless by-value parameters. Patch 1 gives `program_state` a
+move-assignment operator and threads the move through `point_and_state`
+and `exploded_node`, removing a deep copy of the whole region model on
+every exploded-graph node — a measured **6.06% speedup** on `-fanalyzer`
+([`7532151`](https://github.com/gcc-mirror/gcc/commit/7532151); 63.98s →
+60.10s median, 8 interleaved runs, no overlap). Reviewed and pushed on my
+behalf (no commit access) by GCC analyzer maintainer **David Malcolm** and
+GCC maintainers **Martin Jambor** and **Richard Biener** —
+[all 9 commits in GCC trunk](https://github.com/gcc-mirror/gcc/commits?author=bestxmg).
 
 → [Full write-up](./gcc-analyzer-move-semantics.md)
 
@@ -64,15 +60,17 @@ the test suite from ~4 min to ~1.5 min with isolated parallel workers.
 
 → [Full write-up](./mealie-testing.md)
 
-**PostgreSQL — [Hashing a parameterised ScalarArrayOpExpr](https://www.mail-archive.com/pgsql-hackers@lists.postgresql.org/msg238384.html)** · *work in progress*
+**PostgreSQL — [Hashing a parameterised ScalarArrayOpExpr](https://www.mail-archive.com/pgsql-hackers@lists.postgresql.org/msg238384.html)** · *under review (v3)*
 
 Extended PG14's `col = ANY (array)` hash-table optimisation — previously
-limited to constant arrays — to cover the parameterised forms real client
-drivers actually emit (JDBC, psycopg, asyncpg bind parameters), which had
-stayed on the linear-scan path since PG14. Up to **~49× faster** at
-N=1000 (2494ms → 51ms), with the single-execution overhead the original
-PG14 discussion worried about measured at worst +12µs. Posted to
-`pgsql-hackers@lists.postgresql.org`, 9 September 2026.
+limited to constant arrays — to the parameterised forms real client
+drivers emit (JDBC, psycopg, asyncpg). Once PostgreSQL switches a
+prepared statement to its generic plan, those fell back to a linear scan
+on every row: a 1M-row join with a 1000-element list took **972 ms on
+master and 30 ms patched**, and `IN ($1, …, $N)` runs up to **~155×
+faster** at N=1000. Reviewed on `pgsql-hackers` by David Geier; v3 —
+split into a refactor and the feature, and checked against master on
+~48,000 random queries with no differences — posted 20 October 2026.
 
 → [Full write-up](./postgresql-hashed-saop.md)
 
